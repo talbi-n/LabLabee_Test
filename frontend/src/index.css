@@ -50,3 +50,11 @@ code {
   flex-wrap: wrap;
   justify-content: center;
 }
+.btn_add,
+.btn_add:hover {
+  background-color: #30b4a5 !important;
+  border: 1px solid #000000 !important;
+  display: flex !important;
+
+  justify-content: center !important;
+}

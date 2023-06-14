@@ -6,7 +6,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import SpinnerComponent from '../components/SpinnerComponent';
 import { Helmet } from 'react-helmet-async';
 import { reducer } from '../reducers/homeReducer';
+import Button from 'react-bootstrap/Button';
 import LabComponent from '../components/LabComponent';
+import { useNavigate } from 'react-router-dom';
 export default function Home() {
   //using Reducer Hook
   const [{ loading, error, labs }, dispatch] = useReducer(reducer, {
@@ -14,7 +16,7 @@ export default function Home() {
     error: '',
     labs: [],
   });
-
+  const navigate = useNavigate();
   //this useEffect is running only once when the page is loaded
   useEffect(() => {
     //fetchData c'est une fonction asynchrone
@@ -41,6 +43,15 @@ export default function Home() {
       </Helmet>
       <div>
         <h1 className="h1_list_Labs">List of labs</h1>
+        <Button
+          type="button"
+          className="btn_add mx-auto mb-3 mt-2"
+          onClick={() => {
+            navigate(`/AddNewLab`);
+          }}
+        >
+          Add new Lab
+        </Button>
         <div className="labs">
           {loading ? (
             <div className="loader">
