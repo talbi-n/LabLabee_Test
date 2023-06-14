@@ -39,3 +39,12 @@ export const DeleteLab = async (req, res) => {
     res.status(404).send({ message: 'Lab  not found ' });
   }
 };
+//Controller to get the Lab by Id
+export const GetLabById = async (req, res) => {
+  const lab = await Lab.findById(req.params.id);
+  if (lab) {
+    res.send(lab);
+  } else {
+    res.status(404).send({ message: 'Lab not found ' });
+  }
+};

@@ -53,7 +53,7 @@ export default function LabComponent(props) {
             <button
               className="actionButton SuccessButton mx-2"
               onClick={() => {
-                navigate(`/viewLab/`);
+                navigate(`/viewOrUpdateLab/${lab._id}`);
               }}
             >
               View Or Update
