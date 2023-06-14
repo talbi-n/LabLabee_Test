@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 export default function ViewOrUpdateLab() {
   //to get the id as params from the url
   const params = useParams();
+
   const [lab, setLab] = useState({});
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
@@ -17,10 +18,12 @@ export default function ViewOrUpdateLab() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
+        //get Lab datails by Id
         const { data } = await axios.get(`/api/Labs/${params.id}`);
         setLab(data);
         setStartDate(moment(lab.startDate.split('T')[0]).format('YYYY-MM-DD'));
@@ -32,11 +35,13 @@ export default function ViewOrUpdateLab() {
     };
     fetchData();
   }, [endDate, lab.startDate, params.id, lab.endDate]);
+
+  //Handle Update Form
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (technology || endDate || startDate || name) {
-        const { data } = await axios.put(`/api/Labs/${params.id}`, {
+        await axios.put(`/api/Labs/${params.id}`, {
           name: name || lab.name,
           technology: technology || lab.technology,
           endDate: endDate || lab.endDate,

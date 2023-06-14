@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import { toast, ToastContainer } from 'react-toastify';
@@ -8,13 +8,18 @@ export default function LabComponent(props) {
   const navigate = useNavigate();
   //handle delete Lab
   const handleDelete = async (id) => {
-    toast.success('Successfully deleted  !', {
-      position: toast.POSITION.TOP_CENTER,
-    });
-    await axios.delete(`/api/Labs/${lab._id}`);
-    window.location.reload(false);
+    try {
+      await axios.delete(`/api/Labs/${lab._id}`);
+      toast.success('Successfully deleted  !', {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      window.location.reload(false);
+    } catch (err) {
+      toast.error('Error  !', {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
   };
-
   return (
     <div>
       <Card style={{ width: '20rem', margin: 'auto' }} className="card_Lab">

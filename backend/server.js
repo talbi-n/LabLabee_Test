@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true })); // urlencoded method inbuilt in
 //middleware to use routes of LabRouter
 app.use('/api/Labs', LabRouter);
 
-//error handler
+//error handler when request not found
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });

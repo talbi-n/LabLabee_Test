@@ -9,7 +9,6 @@ export const reducer = (state, action) => {
     case 'FETCH_SUCCES':
       //keep previous state + get data  --> payload contain all data
       return { ...state, loading: false, labs: action.payload };
-
     default:
       return { ...state };
   }
