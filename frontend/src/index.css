@@ -58,3 +58,22 @@ code {
 
   justify-content: center !important;
 }
+.action {
+  width: 100%;
+  display: flex;
+}
+.actionButton {
+  border: 0;
+  box-shadow: 'none';
+  outline: none;
+  padding: 3px 5px;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.DeleteButton {
+  background-color: rgb(255, 77, 73);
+}
+.SuccessButton {
+  background-color: rgb(114, 255, 40);
+}

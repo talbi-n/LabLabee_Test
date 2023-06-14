@@ -29,3 +29,13 @@ export const getAllLabs = async (req, res) => {
     res.status(404).send({ message: 'Labs not found' });
   }
 };
+// controller to  delete Lab
+export const DeleteLab = async (req, res) => {
+  const lab = await Lab.findById(req.params.id);
+  if (lab) {
+    const deletedLab = await Lab.findByIdAndDelete(req.params.id);
+    res.status(200).send(deletedLab);
+  } else {
+    res.status(404).send({ message: 'Lab  not found ' });
+  }
+};
