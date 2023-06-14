@@ -29,3 +29,24 @@ code {
   padding: 5%;
   margin-bottom: 5%;
 }
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+  background-color: white;
+}
+
+.h1_list_Labs {
+  font-weight: bold;
+  text-shadow: #30b4a5 5px 0px 15px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 3%;
+}
+.labs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

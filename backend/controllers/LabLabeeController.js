@@ -1,6 +1,6 @@
 import Lab from '../models/LabLabeeModel.js';
 import expressAsyncHandler from 'express-async-handler';
-//function to add the New Lab
+//controller to add the New Lab
 export const AddNewLab = expressAsyncHandler(async (req, res) => {
   try {
     const newLab = new Lab({
@@ -19,3 +19,13 @@ export const AddNewLab = expressAsyncHandler(async (req, res) => {
     res.status(500).send(' cannot create this new Lab because of : ' + err);
   }
 });
+//controller to get all Labs
+export const getAllLabs = async (req, res) => {
+  const labs = await Lab.find();
+  //test if exist
+  if (labs) {
+    res.send(labs);
+  } else {
+    res.status(404).send({ message: 'Labs not found' });
+  }
+};
