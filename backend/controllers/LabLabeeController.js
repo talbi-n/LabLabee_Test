@@ -48,3 +48,19 @@ export const GetLabById = async (req, res) => {
     res.status(404).send({ message: 'Lab not found ' });
   }
 };
+//Controller to put the Lab by Id
+export const UpdateLab = expressAsyncHandler(async (req, res) => {
+  //finding the lab
+  const lab = await Lab.findById(req.params.id);
+  if (lab) {
+    //if it is exist set the lab
+    lab.name = req.body.name;
+    lab.technology = req.body.technology;
+    lab.endDate = req.body.endDate;
+    lab.startDate = req.body.startDate;
+    const updated_lab = await lab.save();
+    res.status(201).send({ message: 'Lab Updated', lab: updated_lab });
+  } else {
+    res.status(404).send({ message: 'Lab not found ' });
+  }
+});

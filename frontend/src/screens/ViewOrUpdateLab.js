@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { Helmet } from 'react-helmet-async';
 import Form from 'react-bootstrap/Form';
@@ -16,7 +16,7 @@ export default function ViewOrUpdateLab() {
   const [technology, setTechnology] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -27,20 +27,40 @@ export default function ViewOrUpdateLab() {
         setEndDate(moment(lab.endDate.split('T')[0]).format('YYYY-MM-DD'));
         setLoading(false);
       } catch (err) {
-        toast.error(err);
         setLoading(false);
       }
     };
     fetchData();
   }, [endDate, lab.startDate, params.id, lab.endDate]);
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (technology || endDate || startDate || name) {
+        const { data } = await axios.put(`/api/Labs/${params.id}`, {
+          name: name || lab.name,
+          technology: technology || lab.technology,
+          endDate: endDate || lab.endDate,
+          startDate: startDate || lab.startDate,
+        });
+        navigate('/');
+      } else {
+        toast.error('No Changing !', {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    } catch (err) {
+      toast.error('Ooops No Changing !', {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  };
   return (
     <div>
       <Container className="small-container">
         <Helmet>
           <title>Create New Lab</title>
         </Helmet>
-        <Form className="card_Lab signinForm">
+        <Form onSubmit={handleSubmit} className="card_Lab signinForm">
           <h3 className="my-3 fw-bold">Update The Lab</h3>
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Name</Form.Label>
